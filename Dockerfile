@@ -10,14 +10,12 @@ COPY package*.json ./
 # Install pnpm
 RUN npm install -g pnpm
 
-# Setup pnpm global bin directory
-RUN pnpm setup
-
 # Install dependencies
 RUN pnpm install
 
 # Install TypeScript and NestJS CLI globally
-RUN pnpm install -g typescript @nestjs/cli
+RUN pnpm install -g typescript @nestjs/cli --global-bin-dir=/usr/local/bin
+
 
 # Copy the entire project
 COPY . .

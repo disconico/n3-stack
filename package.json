@@ -1,12 +1,14 @@
 {
-  "name": "n3-stack",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"name": "n3-stack",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"start": "node apps/server/dist/main"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }
