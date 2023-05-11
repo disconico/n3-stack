@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install -g pnpm
 
 # Install dependencies
-RUN pnpm ci
+RUN pnpm install
 
 # Install TypeScript and NestJS CLI globally
 RUN pnpm install -g typescript @nestjs/cli
