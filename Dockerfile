@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json for installing dependencies
 COPY package*.json ./
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Install dependencies
 RUN pnpm ci
 
