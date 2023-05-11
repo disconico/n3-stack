@@ -26,10 +26,11 @@ RUN cd /app/apps/client && pnpm install
 RUN cd /app/apps/server && pnpm install
 
 # Build the project
-RUN pnpm run build
+RUN cd /app/apps/client && pnpm run build
+RUN cd /app/apps/server && pnpm run build
 
 # Expose the server port
 EXPOSE 3000
 
 # Start the server
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
