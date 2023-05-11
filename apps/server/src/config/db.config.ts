@@ -7,6 +7,8 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   constructor(private configService: ConfigService) {}
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
+    console.log('NICO NODE_ENV:', process.env.NODE_ENV);
+
     if (process.env.NODE_ENV === 'development') {
       return {
         type: this.configService.get<any>('DB_TYPE'),
@@ -34,7 +36,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
         },
       };
     } else if (process.env.NODE_ENV === 'production') {
-      return {
+      const obj = {
         type: this.configService.get<any>('DB_TYPE'),
         url: this.configService.get<string>('DB_NAME'), // Use the connection URL here
         synchronize: JSON.parse(this.configService.get<string>('SYNCHRONIZE')),
@@ -46,6 +48,8 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
           max: 3,
         },
       };
+      console.log('TypeORM config: ', obj);
+      return obj;
     }
   }
 }
