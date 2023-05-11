@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install pnpm
 RUN npm install -g pnpm
 
+# Setup pnpm global bin directory
+RUN pnpm setup
+
 # Install dependencies
 RUN pnpm install
 
