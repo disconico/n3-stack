@@ -15,7 +15,10 @@ import { APP_PIPE } from '@nestjs/core';
       rootPath: join(__dirname, '../..', 'client', 'dist'),
     }),
     ConfigModule.forRoot({
-      envFilePath: `.env.${process.env.NODE_ENV}`,
+      envFilePath:
+        process.env.NODE_ENV === 'production'
+          ? undefined
+          : `.env.${process.env.NODE_ENV}`,
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
