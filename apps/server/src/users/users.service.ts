@@ -12,7 +12,7 @@ export class UsersService {
     return this.repo.save(user);
   }
 
-  async getUser(id: number) {
-    return await this.repo.findOneByOrFail({ id });
+  async findOne(username: string) {
+    return await this.repo.findOneByOrFail({ username });
   }
 }
