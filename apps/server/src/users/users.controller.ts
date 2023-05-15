@@ -20,8 +20,9 @@ export class UsersController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async createUser(@Body() body: CreateUserDto) {
+    const { username, password } = body;
     try {
-      const user = await this.usersService.create(body.username);
+      const user = await this.usersService.create(username, password);
       return user;
     } catch (error) {
       if (

@@ -1,10 +1,11 @@
 ### first request
-GET http://localhost:4000
+GET http://localhost:3000/server
 
 ### Post a user to the database
-POST http://localhost:4000/users
+POST http://localhost:3000/server/users
 Content-Type: application/json
 
 {
-    # "username" : "nico2"
+     "username" : "nico5",
+     "password" : "1234"
     }

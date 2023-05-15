@@ -8,6 +8,9 @@ export class User {
   @Column({ unique: true })
   username: string;
 
+  @Column()
+  password: string;
+
   @AfterInsert()
   logInsert() {
     console.log(`Inserted user with id : ${this.id}`);
