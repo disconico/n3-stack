@@ -14,24 +14,30 @@ function App() {
 			.then((data) => setGreeting(data));
 	}, []);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		fetch('/server/users', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ username: userName }),
-		})
-			.then((res) => res.json())
-			.then((data: User) => {
-				console.log(data);
-				setUsername('');
-				setGreeting(data.username);
+		try {
+			const response = await fetch('/server/users', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ username: userName }),
 			});
-	};
 
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data: User = await response.json();
+			console.log(data);
+			setUsername('');
+			setGreeting(data.username);
+		} catch (error) {
+			console.error('An error occurred:', error);
+		}
+	};
 	return (
 		<>
 			<div>
