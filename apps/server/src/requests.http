@@ -19,6 +19,9 @@ Content-Type: application/json
      "password" : "1234"
     }
 
+### Logout
+POST http://localhost:3000/server/auth/logout
+
 ### Get a user profile
 GET http://localhost:3000/server/users/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pY282NSIsInN1YiI6NywiaWF0IjoxNjg0MjQyNDg3LCJleHAiOjE2ODQ4NDcyODd9.N2hqHdMHiP3tGhS62PKkGRohNE3DzbGX97PeWrwmi3w
