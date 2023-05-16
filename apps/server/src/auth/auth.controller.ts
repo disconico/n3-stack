@@ -1,31 +1,21 @@
-import {
-  Controller,
-  Body,
-  Post,
-  HttpCode,
-  HttpStatus,
-  UseGuards,
-  Get,
-  Request,
-} from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Res } from '@nestjs/common';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { AuthService } from './auth.service';
-import { SignInDto } from './dtos/sign-in-dto';
-import { AuthGuard } from '../guards/auth.guard';
-import { Request as ExpressRequest } from 'express';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @HttpCode(HttpStatus.OK)
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  signIn(@Body() signInDto: SignInDto) {
-    return this.authService.signIn(signInDto.username, signInDto.password);
+  async login(@Request() req) {
+    return this.authService.login(req.user);
   }
 
-  @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  @Post('logout')
+  async logout(@Res() res: Response) {
+    res.cookie('token', '', { expires: new Date(0) });
+    return res.status(200).send({ message: 'Logged out' });
   }
 }

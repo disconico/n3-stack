@@ -2,15 +2,20 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { QueryFailedError } from 'typeorm';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserClientDto } from './dtos/client-user.dto';
+import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('users')
 @Serialize(UserClientDto)
@@ -22,7 +27,7 @@ export class UsersController {
   async createUser(@Body() body: CreateUserDto) {
     const { username, password } = body;
     try {
-      const user = await this.usersService.create(username, password);
+      const user = await this.usersService.createUser(username, password);
       return user;
     } catch (error) {
       if (
@@ -33,5 +38,11 @@ export class UsersController {
       }
       throw error;
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
