@@ -14,7 +14,6 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { QueryFailedError } from 'typeorm';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserClientDto } from './dtos/client-user.dto';
-import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('users')
